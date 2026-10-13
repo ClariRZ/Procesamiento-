@@ -1,0 +1,26 @@
+# Repositorio de código/documentación. Nunca incorporar datos individuales de MRI.
+*.nii
+*.nii.gz
+*.hdr
+*.img
+*.feat/
+*.gfeat/
+*.fsf
+*.mat
+*.par
+*.log
+*.tsv.tmp
+*confounds*.txt
+signal_wm.txt
+signal_csf.txt
+*.proveniencia.json
+*.procedencia.json
+APROBACION_VISUAL.json
+FINALIZADO.json
+*.validacion.json
+**/datos_locales/
+**/trabajo_local/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
