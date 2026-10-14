@@ -6,7 +6,7 @@
 |---|---|---|
 | 00. Insumos y preprocesamiento existente | [00_insumos_y_preprocesamiento](00_insumos_y_preprocesamiento/README.md) | Identificados y conservados |
 | 01. Confusores de 6037/run1 | [01_confundidores/6037_run1](01_confundidores/6037_run1/README.md) | **387×14 construido y validado** |
-| 02. Primer nivel FEAT por run | [02_primer_nivel](02_primer_nivel/README.md) | **Siguiente: revisar EV, derivadas y 21 contrastes** |
+| 02. Primer nivel FEAT por run | [02_primer_nivel](02_primer_nivel/README.md) | **8 EV y 21 contrastes (orig + real) auditados; pendiente diseño GLM** |
 | 03. Efectos fijos run1 + run2 | [03_efectos_fijos](03_efectos_fijos/README.md) | Pendiente |
 | 04. Comparación entre sujetos | [04_analisis_grupal](04_analisis_grupal/README.md) | Pendiente |
 | 05. Atlas y conectividad funcional de tarea | [05_atlas_y_conectividad](05_atlas_y_conectividad/README.md) | Pendiente |
