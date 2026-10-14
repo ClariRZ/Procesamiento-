@@ -32,6 +32,20 @@ python3 "$SCRIPT" status
 
 **Recomendación de ejecución:** terminar y controlar el run2 piloto, luego lanzar `prepare-all`. Escribir los logs fuera del repositorio público. La automatización **nunca aprueba QC visual de manera masiva**. Si falla una carpeta, se conserva para auditoría y queda fuera de `finalize-all`; el lote continúa con las restantes. No ejecutar `prepare-all` en dos terminales al mismo tiempo.
 
+## Resultados de la verificación estructural real del lote (14/10/2026)
+
+La investigadora ejecutó el auditor independiente de lectura tras completar `prepare-all`. Resultados recibidos:
+
+```text
+runs=76 OK_TECNICO=72 LEGADO_COTEJADO=1 FUERA_DE_PREPARE=3 REVISAR=0
+FASES: CONFOUNDS_COTEJADOS=2 MASCARAS_PREPARADAS=71 PREPROC_INCOMPLETO=3
+QC: PENDIENTE_VISUAL=71 PILOTO_MANUAL_SIN_JSON=1 REGISTRADO_POR_HUMANO=1 NO_APLICA=3
+```
+
+Se verificó 6037/run2 con 387 volúmenes, máscara funcional 43 832 vóxeles, WM 8 953, CSF 4 058, fase `CONFOUNDS_COTEJADOS` y QC humano registrado. 6037/run1 consta como piloto manual sin JSON retrospectivo. No hubo errores estructurales detectados por este auditor. **Los 71 runs restantes NO están visualmente aprobados y NO tienen confusores finales**; siguen bloqueados para FINALIZE hasta su revisión. Los tres incompletos siguen fuera del lote.
+
+El auditor fue aportado como archivo descargable a la investigadora, **no está incorporado aquí como script Git**. La salida privada permanece local en `~/TesisDoctoral/`.
+
 ## Pruebas y límites
 
 El 14/10/2026 se comprobó `py_compile` y se realizó una prueba sintética completa: `plan`, `prepare`, rechazo de `finalize` sin aprobar, `approve`, `finalize` 387×14, rechazo de segundo `finalize`, rechazo de segundo `prepare`, y omisión en `prepare-all`. El usuario ejecutó `prepare` con FSL real en 6037/run2: máscara cerebro 43832, WM 8953, CSF 4058; indicó que las máscaras eran correctas visualmente. **La finalización real de run2 y el lote de 71 restantes todavía no constan ejecutados.**
