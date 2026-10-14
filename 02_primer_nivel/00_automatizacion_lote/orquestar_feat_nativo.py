@@ -87,9 +87,9 @@ def prepare(args,sid,run):
     try:
         shutil.copytree(original,temp,symlinks=False,ignore=ignore)
         for rel in ESSENTIAL:
-            a=original/rel
-            b=temp/rel
-            if not good(a) or not good(b) or sha(a)!=sha(b):
+            source_file=original/rel
+            copied_file=temp/rel
+            if not good(source_file) or not good(copied_file) or sha(source_file)!=sha(copied_file):
                 raise RuntimeError('COPIA_NO_COINCIDE:'+rel)
         if (temp/'stats').exists():
             raise RuntimeError('ESTADISTICAS_ANTIGUAS_EN_COPIA')
