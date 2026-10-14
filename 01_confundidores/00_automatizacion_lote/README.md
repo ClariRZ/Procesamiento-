@@ -60,6 +60,20 @@ El resultado previsto es `~/TesisDoctoral/QC_LAMINAS_CONFUNDS_20261014/index.htm
 
 **Ejecución real verificada por salida de terminal, 14/10/2026:** `LAMINAS=71 ERRORES=0`, carpeta local `~/TesisDoctoral/QC_LAMINAS_CONFUNDS_20261014/`. Esto confirma que se generaron las 71 visualizaciones sin errores reportados. **Todavía no se han aprobado visualmente las 71 máscaras**: las cinco secciones por run son un cribado inicial, que debe complementarse con inspección en FSLeyes cuando sea necesario. No interpretar una PNG sin errores como QC humano superado.
 
+## Aprobación de la revisión visual de las 71 láminas — confirmada por la investigadora
+
+La investigadora indicó explícitamente en conversación del 14/10/2026 que **revisó las 71 láminas y considera correctas las máscaras WM y CSF representadas**. Esto certifica la inspección humana de las láminas de cinco cortes de cada run; **no significa que se hayan inspeccionado todos los vóxeles ni equivale a QC anatómico exhaustivo**.
+
+[aprobar_laminas_revisadas.py](aprobar_laminas_revisadas.py) registra esta decisión **por run** utilizando `automatizar_confounds_nativos.py approve`, y no aprueba ninguna máscara por algoritmos. Su preflight exige exactamente 71 pares sujeto/run coincidentes entre `resultado_qc_visual.tsv` y los `prepare.json`, verifica las huellas SHA256 de las máscaras, y requiere declaración explícita:
+
+```bash
+python3 aprobar_laminas_revisadas.py --execute --confirm REVISE_LAS_71_LAMINAS
+```
+
+El comando sin `--execute` produce un plan y **no escribe**. Una interrupción permite continuar: comprueba y respeta `aprobacion_visual.json` existentes antes de completar los restantes. No recalcula imágenes, no genera confusores finales y no ejecuta FEAT.
+
+**Estado:** script publicado, aún sin evidencia de ejecución en la Alienware. Después de registrar las 71 aprobaciones, usar `automatizar_confounds_nativos.py finalize-all --execute` y cotejar 73 matrices esperadas (72 automatizadas, incluido 6037/run2, y el piloto manual de 6037/run1) de 387×14.
+
 ## Pruebas y límites
 
 El 14/10/2026 se comprobó `py_compile` y se realizó una prueba sintética completa: `plan`, `prepare`, rechazo de `finalize` sin aprobar, `approve`, `finalize` 387×14, rechazo de segundo `finalize`, rechazo de segundo `prepare`, y omisión en `prepare-all`. El usuario ejecutó `prepare` con FSL real en 6037/run2: máscara cerebro 43832, WM 8953, CSF 4058; indicó que las máscaras eran correctas visualmente. **La finalización real de run2 y el lote de 71 restantes todavía no constan ejecutados.**
