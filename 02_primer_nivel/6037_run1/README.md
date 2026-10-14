@@ -21,4 +21,6 @@ La plantilla original en la Alienware es:
 
 El primer nivel a preparar será **Statistics only en espacio funcional nativo, sobre copia independiente del directorio `~/FEAT/6037/run1.feat`**, con 8 EV + 8 derivadas, 21 contrastes y 14 regresores adicionales. Sin duplicar movimiento, sin aplicar de nuevo suavizado ni transformar toda la serie 4D a MNI.
 
+**Copia independiente ya creada y comprobada:** [03_copia_preprocesamiento](03_copia_preprocesamiento/README.md) (`~/TesisDoctoral/PRIMER_NIVEL_NATIVO_6037/entrada_run1.feat/`). Se cotejaron cinco archivos esenciales con `cmp`; no se ejecutó FEAT. Siguiente: auditar configuración de registros y EVs del FSF manual antes de generar un diseño nuevo.
+
 **No ejecutar FEAT antes de cerrar los puntos pendientes.**
