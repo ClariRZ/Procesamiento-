@@ -1,6 +1,6 @@
 # 6037/run1 — validación de la matriz del GLM nativo
 
-**Estado: GENERACIÓN Y RANGO NUMÉRICO COMPROBADOS, 14/10/2026, Alienware. FILM no se ha ejecutado.**
+**Estado de esta etapa:** diseño y rango numérico comprobados antes de ejecutar FILM (14/10/2026). **Actualización:** FILM se ejecutó después y generó 21 COPE, VARCOPE y ZSTAT; ver [paso 06](../06_piloto_estadistico/README.md).
 
 ## Entradas existentes (no publicar en Git)
 
@@ -39,11 +39,11 @@ El control de rango se ejecutó con **Gram–Schmidt modificado y dos pasadas**,
 
 **Precaución estadística:** rango completo no es sinónimo de ausencia de multicolinealidad elevada, buen número de condición ni estimabilidad comprobada de todas las comparaciones. El residuo mínimo citado NO es un valor singular.
 
-## Pendiente antes de lanzar FEAT
+## Observaciones metodológicas tras la validación de diseño
 
 1. Comparar filas reales de `design.con` con los pesos esperados de los 21 contrastes del FSF (incluidos ceros en los 14 confusores).
 2. Inspeccionar las visualizaciones de diseño y covarianzas y evaluar colinealidad/eficiencia de los contrastes.
 3. Confirmar que *Statistics only* realmente utilizará el BOLD nativo de la carpeta `.feat` copiada sin repetir preprocesamiento y que los registros relevantes estarán disponibles para efectos fijos y grupo.
 4. Mantener documentada la incertidumbre sobre los ~132 s nominales finales sin eventos.
 
-No subir matrices de diseño particulares, confusores o imágenes del sujeto a este repositorio público. No ejecutar FEAT todavía.
+No subir matrices de diseño particulares, confusores o imágenes del sujeto a este repositorio público. **FEAT ya se ejecutó sobre la copia `entrada_run1.feat`; no relanzarlo**. Los controles pendientes anteriores se conservan como advertencias metodológicas, no como pasos para repetir el preprocesamiento.
