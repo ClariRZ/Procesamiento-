@@ -32,6 +32,24 @@ python3 02_primer_nivel/00_automatizacion_lote/auditar_insumos_confounds.py
 
 El auditor calcula la huella SHA256 de `reg/highres.nii.gz`, busca su carpeta FAST `tissue_<16 caracteres>` dentro de `~/TesisDoctoral/confounds_mirta/<id>/`, comprueba `fast_<id>_pve_0.nii.gz`, `fast_<id>_pve_2.nii.gz`, y `motion_deriv.par` por run. No genera ni modifica NIfTI. **Una coincidencia de nombre basada en huella y archivos presentes no sustituye la inspección geométrica, los hashes de procedencia completos ni el QC visual de WM/CSF.** El script se probó con casos sintéticos positivo y con PVE faltante; no fue ejecutado aún sobre la muestra real.
 
+## Primer nivel: inventario final y generación segura de FSF (14/10/2026)
+
+**Resultado recibido de la Alienware:** `CONFOUNDS_COTEJADOS=73`, `PREPROC_INCOMPLETO=3`, `REVISAR=0`, `REGISTRADO_POR_HUMANO=72` y el piloto 6037/run1 registrado por separado. Se cierra la etapa de confusores para los preprocesamientos completos.
+
+El nuevo script [preparar_fsf_nativos.py](preparar_fsf_nativos.py) tiene **dos acciones**:
+
+- `plan`: solo lectura, detecta 6037/run1 ya calculado, exige un confound final 14-columnas con manifiesto/hashes y QC humano, verifica la existencia de los ocho EV y de los archivos FEAT esenciales, y comprueba que no haya destino del primer nivel ocupado. Debe arrojar idealmente 72 candidatos, pero es necesario comprobarlo sobre la Alienware.
+- `generar --id 6037 --run run2`: tras pasar el plan, utiliza **la plantilla local realmente ejecutada** `~/TesisDoctoral/PRIMER_NIVEL_NATIVO_6037/6037_run1_nativo_INPUTTYPE1.fsf`, conserva los 8 EV, 8 derivadas, 21 contrastes y 14 confusores, y actualiza exclusivamente las rutas y los números de volúmenes, TR y total de vóxeles. Escribe un único FSF nuevo en `~/TesisDoctoral/PRIMER_NIVEL_LOTE_NATIVO/6037/run2_stats_only.fsf`. **NO copia todavía ningún FEAT ni ejecuta FILM.**
+
+```bash
+python3 preparar_fsf_nativos.py plan
+python3 preparar_fsf_nativos.py generar --id 6037 --run run2
+```
+
+El modo `inputtype=1` de FEAT escribe las estadísticas dentro de la **carpeta `.feat` de entrada**, por lo que el siguiente módulo deberá copiar cada preprocesamiento a una ubicación independiente, **excluyendo estadísticas antiguas** y verificando hash/registro antes de lanzar una sola ejecución piloto. No usar `feat` sobre `~/FEAT`.
+
+**Estado:** el script está publicado, pero no ha sido ejecutado todavía sobre el dataset real; no considerar listos los 72 FSF hasta inspeccionar el resultado del plan y probar un caso. `plan` no ejecuta FEAT ni prepara archivos; la generación individual no ejecuta FEAT.
+
 ## Qué sigue tras obtener el inventario
 
 Resolver faltantes de máscaras y confusores **en espacio funcional nativo**, auditar la calidad visual, generar un FSF individual con 8 EV, 8 derivadas, 21 contrastes y 14 confusores; preparar una **copia independiente** por run, validar el diseño y lanzar FILM solamente sobre runs aprobados. En modo *Statistics only* con entrada `.feat`, FSL agrega las estadísticas a esa misma copia.
