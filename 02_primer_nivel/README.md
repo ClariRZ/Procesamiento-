@@ -1,7 +1,11 @@
-# 02 — Primer nivel FEAT Statistics, funcional nativo
+# 02 — Primer nivel FEAT por run, en espacio funcional nativo
 
-Piloto y GUI: [`6037/README.md`](6037/README.md). Motor reutilizable: [`automatizacion/primer_nivel.py`](automatizacion/primer_nivel.py).
+**Estado: PENDIENTE**, condicionado a confusores nativos revisados y completos.
 
-El `.fsf` se obtiene **del diseño real del run**, no de un contraste inventado. Para otros runs es obligatorio pasar `--fsf /ruta/del/runX/design.fsf`. La etapa `diseno` ejecuta FSL `feat_model` con los 14 confusores; la etapa `ejecutar` exige confirmación explícita. No hay lote habilitado.
+Para 6037/run1, usar una **copia independiente** de `~/FEAT/6037/run1.feat`; FEAT **First-level analysis → Statistics → Input is a FEAT directory**. No reemplazar `filtered_func_data.nii.gz` por la imagen normalizada. Conservar los productos `reg/` originales y verificar qué máscara utiliza efectivamente FILM.
 
-**Advertencia:** No utilizar `filtered_func_data_MNI2`; no reemplazar ni renombrar imágenes en el FEAT original. FEAT Statistics recibe la **copia de un directorio FEAT preprocesado**, `inputtype=1`, con el BOLD nativo intacto y los registros existentes. No repetir smoothing, MCFLIRT ni filtrado del BOLD. Cualquier transformación a MNI de COPE/VARCOPE corresponde al nivel posterior.
+Modelo a auditar antes de ejecutar: FSF manual original G15 `/home/clara/Escritorio/6037/run1_firstlevel.feat/design.fsf` (8 EV con derivadas temporales, 21 contrastes, 387 volúmenes, TR 2 s, FILM). Cambiar **solo en una copia** las rutas de eventos, confusores, FEAT de entrada y salida; comprobar diseño y confusores sin duplicar movimiento. Los archivos de eventos de 6037/run1 deben verificarse en la Alienware; no asumir su existencia por el FSF de la G15.
+
+El procedimiento completo y su ejecución se documentarán **después** de cerrar el control visual y la matriz 14×387. No lanzar el GLM ni el lote todavía.
+
+**Importante:** la combinación de dos runs no forma parte del primer nivel; se realiza en [03_efectos_fijos](../03_efectos_fijos/README.md).

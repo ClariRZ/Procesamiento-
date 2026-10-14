@@ -1,14 +1,12 @@
-# 01 — Confusores nativos (Mirta adaptado)
+# 01 — Confusores del GLM
 
-Piloto documentado: [`6037/README.md`](6037/README.md). Motor reutilizable: [`automatizacion/confundidores.py`](automatizacion/confundidores.py).
+Para el primer nivel **nativo** de cada run:
 
-Operaciones separadas: `auditar` (lectura), `mascaras` (FAST + FLIRT, salida nueva), `aprobar` (marcador de revisión humana), `finalizar` (señales y matriz 14 columnas), `estado` (lectura).
+- 6 parámetros MCFLIRT del propio run.
+- 6 primeras diferencias de esos parámetros (primera fila cero).
+- 1 serie temporal media de sustancia blanca (WM) del BOLD nativo.
+- 1 serie temporal media de líquido cefalorraquídeo (CSF) del BOLD nativo.
 
-Para otros sujetos/runs, **primero deben verificarse** su preprocesamiento, registro, identidad anatómica, archivos de movimiento y revisión visual. Ejemplo de invocación **no automática**:
+Se construirá un único archivo **387 filas × 14 columnas** para 6037/run1, después de verificar las señales. No agregar además `Add Motion Parameters` en FEAT, porque duplicaría regresores.
 
-```bash
-python3 01_confundidores/automatizacion/confundidores.py auditar \
-  --sujeto 6037 --run 1 --feat "$HOME/Escritorio/6037/run1.feat"
-```
-
-No hay ejecución masiva ni aprobación visual automática. Cada corrida usa un destino por sujeto/run fuera de Git.
+**Estado real:** en [6037_run1](6037_run1/README.md) las máscaras nativas se generaron el 14/10/2026; el QC visual y las señales aún están pendientes. No son válidas automáticamente por superar controles numéricos.
