@@ -1,14 +1,20 @@
 # 6037/run1 — progreso real
 
-**Equipo:** Alienware, Ubuntu, FSL. **Fuente inalterada:** `~/FEAT/6037/run1.feat/`.
+**Equipo:** Alienware (Ubuntu/FSL). El preprocesamiento `~/FEAT/6037/run1.feat/` continúa intacto.
 
-| Paso | Archivo de documentación | Estado |
-|---|---|---|
-| 1. Reutilizar FAST y crear máscaras en EPI | [01_mascaras_generadas.md](01_mascaras_generadas.md) | **Realizado 14/10/2026 06:36** |
-| 2. Revisar ubicación anatómica en FSLeyes | [02_qc_visual.md](02_qc_visual.md) | **Pendiente** |
-| 3. Extraer señales y construir 14 confusores | [03_senales_y_confounds.md](03_senales_y_confounds.md) | **Pendiente** |
+| Paso | Estado |
+|---|---|
+| Identificación de preprocesamiento, registro, T1 y FAST existente | Verificado |
+| Transformación de máscaras WM/CSF a espacio funcional nativo | **Ejecutada el 14/10/2026** |
+| QC visual de máscaras en FSLeyes | **Confirmado por la investigadora («todo ok»), 14/10/2026** |
+| Extracción de señales medias WM/CSF del BOLD nativo | Pendiente |
+| Matriz de 14 confusores (387 filas) | Pendiente |
+| Primer nivel FEAT en nativo | Pendiente |
 
-**Carpeta real de salida (no versionada):**
-`~/TesisDoctoral/confounds_nativos/6037/run1/`
+**Resultados existentes, fuera de Git:** `~/TesisDoctoral/confounds_nativos/6037/run1/`. CSF 4105 vóxeles, WM 9089 vóxeles.
 
-No ejecutar otra vez la generación de máscaras: ya existen, y el segundo intento se detuvo sin modificar archivos. No ejecutar el GLM todavía.
+**Registro, explicación y scripts:** [01_mascaras_nativas/](01_mascaras_nativas/README.md).
+
+La aprobación anatómica está basada en la revisión reportada por la investigadora, no en una captura nueva visible para el asistente. No regenerar ni sobrescribir las máscaras existentes.
+
+**Continuación:** [03_senales_y_confounds.md](03_senales_y_confounds.md). No lanzar FEAT hasta validar las señales y el diseño del GLM.
