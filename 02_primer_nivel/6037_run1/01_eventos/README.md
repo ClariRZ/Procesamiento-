@@ -53,7 +53,9 @@ Los últimos eventos observados son:
 
 Podría existir un tramo final de adquisición sin tareas, o un desfase en el protocolo/recorte de volúmenes. **No hay evidencia suficiente para decidirlo**; verificar con metadatos reales de adquisición, diseño de la tarea, parámetros `ndelete` y cronología de otros runs. No recortar series, desplazar onsets ni agregar `Descanso` como noveno EV sin justificación.
 
-**Estado:** formato y tiempos dentro de adquisición aprobados; **coherencia completa del paradigma y tramo final por confirmar**, y también quedan pendientes los 21 contrastes.
+**Comparación ejecutada de ambos runs (14/10/2026):** run1 y run2 tienen 387 volúmenes, TR=2 s y `ndelete=0`. Sus últimos descansos terminan a **641.706 s** y **641.595 s**, dejando respectivamente **132.294 s** y **132.405 s** hasta el final nominal (diferencia de 0.111 s). [Documentación y script de lectura](02_comparacion_runs/README.md). Es un patrón repetido; **la causa y la adecuación de conservar todos los volúmenes aún requieren corroboración del protocolo de adquisición**.
+
+**Estado:** formato y tiempos dentro de adquisición aprobados; cronología inicial plausible; **tramo final por confirmar con protocolo/registro experimental**. Pendiente la auditoría de los 21 contrastes.
 
 ## Scripts
 
