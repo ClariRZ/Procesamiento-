@@ -1,15 +1,41 @@
-# Automatización de confusores nativos (72 runs pendientes)
+# Automatización de confusores nativos — 72 runs pendientes
 
-El inventario del 14/10/2026 confirmó 38 sujetos y 76 runs; 72 tienen preprocesamiento, FAST y derivadas disponibles, 6037/run1 ya fue analizado y tres runs (5031/run1, 6025/run1, 6025/run2) tienen preprocesamiento incompleto.
+**Estado: código publicado en GitHub, probado con FSL simulado y con la etapa PREPARE real de 6037/run2.**
+El inventario real del 14/10/2026 halló 76 runs: 72 pendientes con insumos FAST y derivadas existentes, 6037/run1 terminado y 3 preprocesamientos incompletos (5031/run1, 6025/run1 y 6025/run2).
 
-Protocolo de cada run: PLAN → PREPARE → inspección visual WM/CSF → APPROVE → FINALIZE.
+## Código
+[automatizar_confounds_nativos.py](automatizar_confounds_nativos.py)
 
-PREPARE: reutilizar FAST PVE0/2 correspondiente al T1, binarizar en 0.9, transformar con highres2example_func.mat y vecino más próximo, intersectar con máscara funcional, comprobar volumen/geometría y solapamiento; nunca reejecutar preprocesamiento ni FAST.
+**Los únicos cambios permitidos están en** `~/TesisDoctoral/confounds_nativos/<ID>/<run>/`. No se reejecutan BET, FAST, MCFLIRT, FEAT ni se escribe dentro de `~/FEAT`.
 
-APPROVE: requiere autorización visual explícita por run; nunca automática.
+La preparación usa PVE0 (CSF) y PVE2 (WM) de la carpeta `confounds_mirta/<ID>/tissue_<SHA256_T1_16>`. Umbral 0.9, `flirt -applyxfm` con `highres2example_func.mat` y vecino más cercano, intersección con máscara funcional, rechazo de máscaras vacías y solapamiento WM/CSF. Las señales se extraen con `fslmeants` en el espacio funcional nativo.
 
-FINALIZE: calcular señales medias WM/CSF con fslmeants sobre BOLD nativo, agregar seis parámetros MCFLIRT y sus seis derivadas; generar exactamente 14 columnas, verificar el número de volúmenes, finitud y variación.
+## Etapas
 
-No escribir nunca en ~/FEAT, ni sobrescribir confusores existentes. Ejecutar sobre el piloto 6037/run2 y después habilitar el lote de máscaras. Las carpetas incompletas deben conservarse para investigar errores, no eliminarse automáticamente. Ninguna máscara puede aprobarse solo mediante un control numérico. FEAT no forma parte de esta etapa.
+1. **prepare**: genera máscaras e informe `prepare.json`; NO extrae señales ni aprueba QC.
+2. **approve**: exige observador, declaración `HE_REVISADO_AMBAS_MASCARAS` y hashes de máscaras intactos después de inspección visual en FSLeyes.
+3. **finalize**: exclusivamente después de approve, genera las dos señales y la tabla `Nvol × 14`: 6 MCFLIRT, 6 derivadas, WM, CSF. Comprueba nvol, finitud, variabilidad y derivadas respecto de movimiento.
+4. **prepare-all --execute**: prepara todos los runs elegibles sin tocar los existentes. Omite el piloto de 6037/run1, 6037/run2 ya preparado y los tres incompletos.
+5. **finalize-all --execute**: finaliza solamente los runs **individualmente aprobados**.
+6. **plan** y **status**: solo lectura; permiten identificar faltantes y estados.
 
-Los scripts experimentales se prueban inicialmente con entradas sintéticas; la validación sobre FSL real está pendiente. Los datos de sujetos quedan fuera del repositorio público.
+Ejemplos (ajustar la ruta al clon o al archivo local descargado):
+
+```bash
+SCRIPT="$HOME/TesisDoctoral/CODIGO_AUTOMATIZACION/automatizacion_confounds_72/automatizar_confounds_nativos.py"
+python3 "$SCRIPT" status
+python3 "$SCRIPT" approve --id 6037 --run run2 --observer "Investigadora principal" --confirm HE_REVISADO_AMBAS_MASCARAS
+python3 "$SCRIPT" finalize --id 6037 --run run2
+python3 "$SCRIPT" prepare-all --execute
+python3 "$SCRIPT" status
+```
+
+**Recomendación de ejecución:** terminar y controlar el run2 piloto, luego lanzar `prepare-all`. Escribir los logs fuera del repositorio público. La automatización **nunca aprueba QC visual de manera masiva**. Si falla una carpeta, se conserva para auditoría y queda fuera de `finalize-all`; el lote continúa con las restantes. No ejecutar `prepare-all` en dos terminales al mismo tiempo.
+
+## Pruebas y límites
+
+El 14/10/2026 se comprobó `py_compile` y se realizó una prueba sintética completa: `plan`, `prepare`, rechazo de `finalize` sin aprobar, `approve`, `finalize` 387×14, rechazo de segundo `finalize`, rechazo de segundo `prepare`, y omisión en `prepare-all`. El usuario ejecutó `prepare` con FSL real en 6037/run2: máscara cerebro 43832, WM 8953, CSF 4058; indicó que las máscaras eran correctas visualmente. **La finalización real de run2 y el lote de 71 restantes todavía no constan ejecutados.**
+
+La igualdad de dimensiones y pixdim no verifica orientación, matriz afín ni calidad anatómica. Cada run queda sujeto a QC visual y revisión adicional de la señal; no atribuir aprobación a runs no inspeccionados. La huella del T1 se utiliza para ubicar la segmentación FAST, pero no sustituye auditoría exhaustiva de procedencia. Los datos individuales no se suben al Git público.
+
+**Primer nivel posterior:** ver [automatización del primer nivel](../../02_primer_nivel/00_automatizacion_lote/README.md). FEAT Stats only (`inputtype=1`) se debe ejecutar únicamente **sobre copias nuevas** de los directorios `.feat` porque escribe las estadísticas dentro de su entrada.
