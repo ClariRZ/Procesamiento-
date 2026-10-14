@@ -23,4 +23,6 @@ El primer nivel a preparar será **Statistics only en espacio funcional nativo, 
 
 **Copia independiente ya creada y comprobada:** [03_copia_preprocesamiento](03_copia_preprocesamiento/README.md) (`~/TesisDoctoral/PRIMER_NIVEL_NATIVO_6037/entrada_run1.feat/`). Se cotejaron cinco archivos esenciales con `cmp`; no se ejecutó FEAT. Siguiente: auditar configuración de registros y EVs del FSF manual antes de generar un diseño nuevo.
 
+**Registro, convolución y filtros comprobados:** el FSF nativo de preprocesamiento declara funcional→T1 y T1→MNI no lineal, mientras que la plantilla manual estadística usaba BOLD ya MNI. Los ocho EV conservan HRF doble gamma (`convolve=3`) y filtrado del diseño (`tempfilt_yn=1`). [Informe y script](04_revision_configuracion/README.md). Los registros del preprocesamiento deben preservarse al preparar Stats only; no reutilizar a ciegas las opciones espaciales del FSF manual.
+
 **No ejecutar FEAT antes de cerrar los puntos pendientes.**
