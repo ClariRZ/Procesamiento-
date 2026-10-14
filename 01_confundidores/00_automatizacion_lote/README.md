@@ -58,7 +58,7 @@ Ejemplo desde un clon local del repositorio (es necesaria la Python de FSL con `
 
 El resultado previsto es `~/TesisDoctoral/QC_LAMINAS_CONFUNDS_20261014/index.html`. El script **se detiene si esa carpeta existe**; no la sobrescribe. Abrir el HTML localmente; no publicarlo en GitHub. Es una previsualización de cinco cortes, **no sustituye revisar todos los cortes y tres planos cuando haya dudas**. Aprobación solo individual de máscaras efectivamente inspeccionadas.
 
-**Validación pendiente:** esta utilidad de presentación se añadió al repositorio pero aún no se ha probado ejecutándola con los 71 runs reales. No interpretar la generación de una PNG como QC humano superado.
+**Ejecución real verificada por salida de terminal, 14/10/2026:** `LAMINAS=71 ERRORES=0`, carpeta local `~/TesisDoctoral/QC_LAMINAS_CONFUNDS_20261014/`. Esto confirma que se generaron las 71 visualizaciones sin errores reportados. **Todavía no se han aprobado visualmente las 71 máscaras**: las cinco secciones por run son un cribado inicial, que debe complementarse con inspección en FSLeyes cuando sea necesario. No interpretar una PNG sin errores como QC humano superado.
 
 ## Pruebas y límites
 
