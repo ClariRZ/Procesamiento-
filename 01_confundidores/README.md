@@ -1,9 +1,11 @@
-# 01 — Confusores funcionales nativos
+# 01 — Confusores del GLM en espacio funcional nativo
 
-Para cada run: seis parámetros MCFLIRT + seis derivadas temporales del movimiento + señal media WM + señal media CSF. En 6037/run1 habrá 387 filas y 14 columnas.
+**Piloto 6037/run1 completado y validado (14/10/2026).** Un único fichero `todos_confounds_nativo.txt` de **387 filas × 14 columnas**: seis parámetros MCFLIRT, seis primeras diferencias del movimiento, señal WM nativa y señal CSF nativa.
 
-**Piloto:** las máscaras WM/CSF fueron generadas y la investigadora confirmó su revisión en FSLeyes el 14/10/2026. Se documentan junto con los scripts reproducibles en [6037_run1/01_mascaras_nativas](6037_run1/01_mascaras_nativas/README.md).
+Todos los productos individuales se conservan en la Alienware; no en este repositorio público.
 
-**Ejecutado el 14/10/2026:** extracción de ambas señales nativas WM/CSF, cada una con 387 valores, finitos y variables. [Procedimiento y scripts](6037_run1/02_senales_nativas/README.md). **Pendiente:** validación del movimiento y derivadas y construcción/verificación del fichero 387×14. No se recalcula FAST ni el preprocesamiento original. No añadir de nuevo los parámetros de movimiento en FEAT cuando estén incluidos en los 14 confusores.
+La cadena documentada, con scripts por subetapa, se encuentra en [6037_run1](6037_run1/README.md): máscaras → señales tisulares → movimiento/derivadas → matriz final.
 
-[Siguiente paso: señales y confusores](6037_run1/03_senales_y_confounds.md).
+**Estado:** el contenido y la procedencia de la matriz final se verificaron con las cuatro fuentes; **aún falta validar la matriz completa de diseño FEAT** y sus eventos. Al configurar FEAT, seleccionar *Don't Add Motion Parameters* porque el fichero adicional ya incluye el movimiento.
+
+**Continuación:** [02 — primer nivel nativo](../02_primer_nivel/README.md).
