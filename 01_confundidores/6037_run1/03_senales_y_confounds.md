@@ -1,20 +1,23 @@
-# Paso 3 — Extraer WM/CSF y preparar la matriz de confusores
+# Paso 3 — Confusores de primer nivel: señales y matriz
 
-**Estado: PENDIENTE. No se ha ejecutado.** No extraer señales antes de aprobar el QC visual.
+## Parte A. Señales nativas WM/CSF — HECHA
 
-Una vez aprobadas las dos máscaras, las entradas previstas serán:
+El 14/10/2026 se extrajeron y verificaron las dos señales a partir del BOLD nativo de 6037/run1. Cada señal tiene **387 filas, 1 columna, valores finitos y variación temporal**. Resultados, comandos y scripts: [02_senales_nativas](02_senales_nativas/README.md).
 
-- BOLD: `~/FEAT/6037/run1.feat/filtered_func_data.nii.gz` (387 volúmenes, **nativo**).
-- WM: `~/TesisDoctoral/confounds_nativos/6037/run1/mask_wm_func.nii.gz`.
-- CSF: `~/TesisDoctoral/confounds_nativos/6037/run1/mask_csf_func.nii.gz`.
-- Movimiento: `~/FEAT/6037/run1.feat/mc/prefiltered_func_data_mcf.par`.
-- Derivadas existentes: `~/TesisDoctoral/confounds_mirta/6037/run1/motion_deriv.par` (revalidar procedencia y valores contra el movimiento).
+| Señal | Mínimo | Máximo |
+|---|---:|---:|
+| WM | 10818.271690 | 11030.664290 |
+| CSF | 8035.584346 | 8250.511604 |
 
-**Pendiente de construir**, en nuevo destino bajo `~/TesisDoctoral/confounds_nativos/6037/run1/`:
+## Parte B. Construcción del archivo de 14 confusores — PENDIENTE
 
-1. `fslmeants` sobre BOLD nativo para las dos señales.
-2. Verificar exactamente 387 muestras por señal, que sean finitas y no constantes.
-3. Verificar `motion_deriv.par` frente a las primeras diferencias del `.par` original.
-4. Combinar en orden **6 movimiento + 6 derivadas + 1 WM + 1 CSF**, sin borrar filas: 387×14; comprobar finitud y rango, guardar procedencia.
+Entradas ya identificadas:
 
-No se incluye aún un lanzador ejecutable porque falta la decisión QC del paso anterior. No reciclar por defecto las señales WM/CSF extraídas previamente en MNI.
+- Movimiento: `~/FEAT/6037/run1.feat/mc/prefiltered_func_data_mcf.par` (6 columnas, del mismo run).
+- Derivadas: `~/TesisDoctoral/confounds_mirta/6037/run1/motion_deriv.par` (6 columnas, verificar que cada fila sea la diferencia temporal del movimiento anterior, primera fila cero).
+- Señal WM: `~/TesisDoctoral/confounds_nativos/6037/run1/signal_wm_nativa.txt`.
+- Señal CSF: `~/TesisDoctoral/confounds_nativos/6037/run1/signal_csf_nativa.txt`.
+
+**Siguiente acción:** validar movimiento y derivadas antes de combinar. Después, crear un archivo nuevo **387 × 14** en orden: 6 movimiento + 6 derivadas + 1 WM + 1 CSF. Comprobar finitud, filas/columnas, derivadas, constancia y rango del diseño GLM. No confundir derivadas de movimiento con derivadas temporales de los EV de tarea.
+
+No reutilizar las antiguas señales WM/CSF extraídas en MNI. No ejecutar todavía FEAT.
