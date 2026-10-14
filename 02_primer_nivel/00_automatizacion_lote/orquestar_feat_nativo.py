@@ -98,8 +98,7 @@ def prepare(args,sid,run):
                  'template_hash':sha(args.template),
                  'confounds_hash':sha(args.conf_root/sid/run/'todos_confounds_nativo.txt'),
                  'qc_visual':'registrado previamente, no comprobado por este orquestador'}
-        (temp/GUARD).write_text(json.dumps(payload,indent=2)+'
-')
+        (temp/GUARD).write_text(json.dumps(payload,indent=2)+chr(10))
         temp.rename(dest)
     except Exception:
         # Se conserva una copia parcial para permitir auditoría; NUNCA borrar automáticamente.
