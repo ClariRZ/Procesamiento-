@@ -1,12 +1,9 @@
-# 01 — Confusores del GLM
+# 01 — Confusores funcionales nativos
 
-Para el primer nivel **nativo** de cada run:
+Para cada run: seis parámetros MCFLIRT + seis derivadas temporales del movimiento + señal media WM + señal media CSF. En 6037/run1 habrá 387 filas y 14 columnas.
 
-- 6 parámetros MCFLIRT del propio run.
-- 6 primeras diferencias de esos parámetros (primera fila cero).
-- 1 serie temporal media de sustancia blanca (WM) del BOLD nativo.
-- 1 serie temporal media de líquido cefalorraquídeo (CSF) del BOLD nativo.
+**Piloto:** las máscaras WM/CSF fueron generadas y la investigadora confirmó su revisión en FSLeyes el 14/10/2026. Se documentan junto con los scripts reproducibles en [6037_run1/01_mascaras_nativas](6037_run1/01_mascaras_nativas/README.md).
 
-Se construirá un único archivo **387 filas × 14 columnas** para 6037/run1, después de verificar las señales. No agregar además `Add Motion Parameters` en FEAT, porque duplicaría regresores.
+**Pendiente:** extracción de las señales y creación/verificación del fichero 387×14. No se recalcula FAST ni el preprocesamiento original. No añadir de nuevo los parámetros de movimiento en FEAT cuando estén incluidos en los 14 confusores.
 
-**Estado real:** en [6037_run1](6037_run1/README.md) las máscaras nativas se generaron el 14/10/2026; el QC visual y las señales aún están pendientes. No son válidas automáticamente por superar controles numéricos.
+[Siguiente paso: señales y confusores](6037_run1/03_senales_y_confounds.md).
