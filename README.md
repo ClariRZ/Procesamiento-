@@ -1,26 +1,23 @@
-# Tesis doctoral — procesamiento funcional FSL, registro paso a paso
+# Procesamiento funcional FSL — tesis doctoral
 
-**Rama de reorganización (14/10/2026).** Esta versión documenta lo **realmente realizado** en el piloto 6037/run1 en la **Alienware**. La rama `main` conserva, como respaldo, los scripts previos y sus pruebas; **no se borraron** de `main`.
+**Piloto actual: 6037/run1 en la Alienware, espacio funcional nativo.** Este repositorio documenta las operaciones realmente ejecutadas, los controles reportados por la investigadora y los scripts reproducibles incorporados después de cada paso. La documentación de la antigua organización se conserva en el historial de Git, no en los archivos vigentes.
 
-## Orden de trabajo
-
-| Carpeta | Etapa | Estado |
+| Etapa | Ubicación | Estado |
 |---|---|---|
-| [00_insumos_y_preprocesamiento](00_insumos_y_preprocesamiento/README.md) | Localizar y comprobar el preprocesamiento FSL original | Insumos confirmados; QC previo no sustituido |
-| [01_confundidores/6037_run1](01_confundidores/6037_run1/README.md) | FAST existente, máscaras WM/CSF en EPI, revisión, señales, 14 columnas | **Máscaras y señales nativas correctas; matriz 387×14 pendiente** |
-| [02_primer_nivel](02_primer_nivel/README.md) | GLM de cada run en espacio funcional nativo; 8 EV y 21 contrastes | Pendiente |
-| [03_efectos_fijos](03_efectos_fijos/README.md) | Combinar run1 + run2 por sujeto | Pendiente |
-| [04_analisis_grupal](04_analisis_grupal/README.md) | Comparaciones entre participantes | Pendiente |
-| [05_atlas_y_conectividad](05_atlas_y_conectividad/README.md) | Atlas, señales regionales y conectividad funcional durante la tarea | Pendiente |
-| [DECISIONES.md](DECISIONES.md) | Decisiones, advertencias y procedencia | En actualización |
+| 00. Insumos y preprocesamiento existente | [00_insumos_y_preprocesamiento](00_insumos_y_preprocesamiento/README.md) | Identificados y conservados |
+| 01. Confusores de 6037/run1 | [01_confundidores/6037_run1](01_confundidores/6037_run1/README.md) | **387×14 construido y validado** |
+| 02. Primer nivel FEAT por run | [02_primer_nivel](02_primer_nivel/README.md) | **Siguiente: revisar EV, derivadas y 21 contrastes** |
+| 03. Efectos fijos run1 + run2 | [03_efectos_fijos](03_efectos_fijos/README.md) | Pendiente |
+| 04. Comparación entre sujetos | [04_analisis_grupal](04_analisis_grupal/README.md) | Pendiente |
+| 05. Atlas y conectividad funcional de tarea | [05_atlas_y_conectividad](05_atlas_y_conectividad/README.md) | Pendiente |
 
-## Principios
+## Reglas de trabajo
 
-1. **Un paso a la vez.** Cada etapa registra insumos, comandos, resultados numéricos y QC; no se declara completa una operación pendiente.
-2. **FSL nativo en primer nivel.** Utilizar `filtered_func_data.nii.gz` de cada `.feat` original sin normalizar todo el BOLD a MNI antes de FILM. Mantener transformaciones existentes para niveles posteriores.
-3. **Ningún dato individual en Git.** Este repositorio es público: no subir NIfTI, DICOM, `.feat`, eventos de participantes, matrices de confusores, capturas de MRI ni información clínica.
-4. **No escribir en los preprocesamientos originales.** Las nuevas máscaras están bajo `~/TesisDoctoral/confounds_nativos/6037/run1/`, fuera de Git.
-5. **Máscara generada ≠ aprobada.** FAST, registro y máscaras requieren inspección humana.
-6. **No ejecutar scripts históricos automáticamente.** Los programas de la rama `main` son material preservado, no evidencia de que se ejecutaron en este flujo.
+- Un paso a la vez: ejecutar → verificar → documentar → pasar al siguiente.
+- Primer nivel en **espacio funcional nativo**; combinar resultados estadísticos con registros apropiados antes de comparaciones superiores y atlas.
+- No repetir BET, FAST, MCFLIRT ni etapas ya resueltas; no modificar ni sobrescribir `~/FEAT/6037/run1.feat/`.
+- Guardar imágenes NIfTI, datos individuales, eventos y matrices de confusores **solo en almacenamiento local/privado**. Este GitHub es público.
+- No atribuir a una captura inicial una aprobación que no pueda verificarse; conservar la procedencia de la valoración anatómica.
+- Los nuevos scripts de Git aún **no fueron ejecutados directamente** como versiones independientes en la Alienware, salvo que se indique lo contrario. Los pasos manuales que reproducen sí fueron verificados.
 
-**Siguiente acción:** revisar en FSLeyes las máscaras WM y CSF del piloto 6037/run1, documentada en [01_confundidores/6037_run1/02_qc_visual.md](01_confundidores/6037_run1/02_qc_visual.md).
+**Archivo de confusores verificado:** `~/TesisDoctoral/confounds_nativos/6037/run1/todos_confounds_nativo.txt`, 387 filas × 14 columnas. [Script, verificación y detalles](01_confundidores/6037_run1/04_confounds_finales/README.md).
