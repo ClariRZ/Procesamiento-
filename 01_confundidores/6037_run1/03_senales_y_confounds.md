@@ -18,6 +18,6 @@ Entradas ya identificadas:
 - Señal WM: `~/TesisDoctoral/confounds_nativos/6037/run1/signal_wm_nativa.txt`.
 - Señal CSF: `~/TesisDoctoral/confounds_nativos/6037/run1/signal_csf_nativa.txt`.
 
-**Siguiente acción:** validar movimiento y derivadas antes de combinar. Después, crear un archivo nuevo **387 × 14** en orden: 6 movimiento + 6 derivadas + 1 WM + 1 CSF. Comprobar finitud, filas/columnas, derivadas, constancia y rango del diseño GLM. No confundir derivadas de movimiento con derivadas temporales de los EV de tarea.
+**Movimiento y derivadas: validados** (387×6 cada uno, error máximo 5.55111512313e-17). [Procedimiento y script de verificación](03_movimiento/README.md). **Siguiente acción:** combinar. Después, crear un archivo nuevo **387 × 14** en orden: 6 movimiento + 6 derivadas + 1 WM + 1 CSF. Comprobar finitud, filas/columnas, derivadas, constancia y rango del diseño GLM. No confundir derivadas de movimiento con derivadas temporales de los EV de tarea.
 
 No reutilizar las antiguas señales WM/CSF extraídas en MNI. No ejecutar todavía FEAT.
