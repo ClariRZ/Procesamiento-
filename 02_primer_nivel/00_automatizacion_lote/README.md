@@ -77,3 +77,16 @@ La usuaria ejecutó el generador local del paquete `primer_nivel_fsf_automatizac
 
 El próximo paso es copiar solamente el `.feat` preprocesado original de 6037/run2 en una ruta independiente, sin datos MNI2 auxiliares ni `stats/` preexistente, cotejar los ocho archivos esenciales con el original, y después generar y revisar su diseño con `feat_model`. **No ejecutar FEAT antes de verificar la copia y el diseño.** La herramienta de copia fue probada con directorios sintéticos: plan sin escritura, copia cotejada, exclusión de estadísticas anteriores y rechazo de una segunda copia. Pendiente comprobarla en la Alienware.
 
+
+
+## Piloto 6037/run2 completo — 14/10/2026, 17:09:48 -03
+
+La investigadora informó el resultado del `feat "$FSF"` sobre la **copia** `~/TesisDoctoral/PRIMER_NIVEL_LOTE_NATIVO/6037/run2.feat/`: **FEAT terminado sin errores reportados, COPE 21/21, VARCOPE 21/21, ZSTAT 21/21**. `cmp` confirmó BOLD idéntico frente a `~/FEAT/6037/run2.feat/`; `stats/cope1` conserva dimensiones **64×64×44** y voxel **3.593800×3.593800×3.599899 mm**. Los registros de run2 y la calidad espacial/estadística completa todavía requieren QC específico. 6037/run1 ya estaba analizado antes. **No relanzar ninguno de los dos pilotos**.
+
+Con 73 confounds disponibles, quedan **71 primeros niveles**; 5031/run1, 6025/run1 y 6025/run2 continúan bloqueados por preprocesamiento incompleto.
+
+## Orquestador de lote v1 — entrega pendiente de validación en la Alienware
+
+Se elaboró un paquete descargable con `planificar_fsf_primer_nivel.py`, `generar_fsf_primer_nivel.py`, `copiar_feat_para_stats.py` y `automatizar_primer_nivel.py`; el código todavía **no ha sido publicado dentro de esta carpeta de GitHub**. La secuencia es `plan` (solo lectura), `prepare-one`, `prepare-all` (FSF por run, copia independiente y `feat_model` + rango/contrastes), `run-one`, `run-all` secuencial y `status`. Las operaciones con cambios requieren `--execute`; las masivas requieren confirmaciones literales. Se probó con datos sintéticos y programas FSL simulados: un run exitoso y una falla FEAT con protección contra relanzamiento. **Todavía no se ha ejecutado `plan` del paquete nuevo sobre los datos reales** y no se habilita `run-all` hasta su verificación.
+
+Precaución: FEAT `Statistics only` con entrada directorio FEAT (`inputtype=1`) escribe las estadísticas dentro de la entrada, por lo que la copia independiente por run es obligatoria. No mover ni borrar carpetas `.feat` parciales automáticamente.
