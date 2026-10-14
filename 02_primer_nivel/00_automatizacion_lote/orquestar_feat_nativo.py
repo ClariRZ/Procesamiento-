@@ -19,7 +19,7 @@ from preparar_fsf_nativos import ready, make, check_options, EXACT, fsf_entries,
 ESSENTIAL = ('filtered_func_data.nii.gz', 'mask.nii.gz', 'example_func.nii.gz',
              'reg/example_func2highres.mat', 'reg/highres2standard_warp.nii.gz',
              'reg/example_func2standard_warp.nii.gz', 'reg/standard.nii.gz')
-EXCLUDE = {'stats', 'logs', '.files', 'reg_standard'}
+EXCLUDE = {'stats', 'logs', '.files', 'reg_standard',\n           'design.mat', 'design.con', 'design.fts', 'design.frf',\n           'design.min', 'design.trg', 'design.png', 'design.ppm',\n           'design_cov.png', 'design_cov.ppm', 'design.gif'}
 REPORTS = ('report.html', 'report_log.html', 'report_stats.html',
            'report_poststats.html', 'report_prestats.html', 'report_reg.html')
 GUARD = 'ORQUESTADOR_PREPARADO.json'
