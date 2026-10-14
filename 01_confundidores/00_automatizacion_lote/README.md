@@ -46,6 +46,20 @@ Se verificó 6037/run2 con 387 volúmenes, máscara funcional 43 832 vóxeles, W
 
 El auditor fue aportado como archivo descargable a la investigadora, **no está incorporado aquí como script Git**. La salida privada permanece local en `~/TesisDoctoral/`.
 
+## Revisión visual por lotes sin aprobar automáticamente
+
+[generar_laminas_qc.py](generar_laminas_qc.py) crea un directorio **nuevo** con imágenes PNG de cinco cortes por run, superposición de WM/CSF sobre `example_func`, y un `index.html` privado para revisar los 71 runs pendientes. **No crea ni altera NIfTI, aprobaciones ni confusores**. Compara las huellas del `prepare.json`, las geometrías y matrices afines, y rechaza máscaras fuera de la máscara cerebral o solapadas.
+
+Ejemplo desde un clon local del repositorio (es necesaria la Python de FSL con `numpy`, `nibabel` y `matplotlib`):
+
+```bash
+"$FSLDIR/bin/python" 01_confundidores/00_automatizacion_lote/generar_laminas_qc.py
+```
+
+El resultado previsto es `~/TesisDoctoral/QC_LAMINAS_CONFUNDS_20261014/index.html`. El script **se detiene si esa carpeta existe**; no la sobrescribe. Abrir el HTML localmente; no publicarlo en GitHub. Es una previsualización de cinco cortes, **no sustituye revisar todos los cortes y tres planos cuando haya dudas**. Aprobación solo individual de máscaras efectivamente inspeccionadas.
+
+**Validación pendiente:** esta utilidad de presentación se añadió al repositorio pero aún no se ha probado ejecutándola con los 71 runs reales. No interpretar la generación de una PNG como QC humano superado.
+
 ## Pruebas y límites
 
 El 14/10/2026 se comprobó `py_compile` y se realizó una prueba sintética completa: `plan`, `prepare`, rechazo de `finalize` sin aprobar, `approve`, `finalize` 387×14, rechazo de segundo `finalize`, rechazo de segundo `prepare`, y omisión en `prepare-all`. El usuario ejecutó `prepare` con FSL real en 6037/run2: máscara cerebro 43832, WM 8953, CSF 4058; indicó que las máscaras eran correctas visualmente. **La finalización real de run2 y el lote de 71 restantes todavía no constan ejecutados.**
