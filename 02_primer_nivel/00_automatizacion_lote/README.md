@@ -90,3 +90,28 @@ Con 73 confounds disponibles, quedan **71 primeros niveles**; 5031/run1, 6025/ru
 Se elaboró un paquete descargable con `planificar_fsf_primer_nivel.py`, `generar_fsf_primer_nivel.py`, `copiar_feat_para_stats.py` y `automatizar_primer_nivel.py`; el código todavía **no ha sido publicado dentro de esta carpeta de GitHub**. La secuencia es `plan` (solo lectura), `prepare-one`, `prepare-all` (FSF por run, copia independiente y `feat_model` + rango/contrastes), `run-one`, `run-all` secuencial y `status`. Las operaciones con cambios requieren `--execute`; las masivas requieren confirmaciones literales. Se probó con datos sintéticos y programas FSL simulados: un run exitoso y una falla FEAT con protección contra relanzamiento. **Todavía no se ha ejecutado `plan` del paquete nuevo sobre los datos reales** y no se habilita `run-all` hasta su verificación.
 
 Precaución: FEAT `Statistics only` con entrada directorio FEAT (`inputtype=1`) escribe las estadísticas dentro de la entrada, por lo que la copia independiente por run es obligatoria. No mover ni borrar carpetas `.feat` parciales automáticamente.
+
+## Orquestador incorporado al repositorio (14/10/2026)
+
+[orquestar_feat_nativo.py](orquestar_feat_nativo.py) coordina `plan`, `prepare-all`, `status` y `run-all`. Usa el generador existente `preparar_fsf_nativos.py`, los confusores nativos con manifiesto SHA256 y los EV propios de cada run. Omite los pilotos 6037/run1 y 6037/run2; no procesa los tres FEAT incompletos.
+
+Antes de toda ejecución real, ejecutar el plan en la Alienware:
+
+```bash
+cd ~/Procesamiento-
+python3 02_primer_nivel/00_automatizacion_lote/orquestar_feat_nativo.py plan
+```
+
+Para preparar (escribe nuevos FSF y copias independientes, nunca los `.feat` originales):
+
+```bash
+python3 02_primer_nivel/00_automatizacion_lote/orquestar_feat_nativo.py prepare-all --execute --confirm PREPARAR_LOTE
+```
+
+`status` es de solo lectura. La ejecución estadística masiva requiere confirmación diferente:
+
+```bash
+python3 02_primer_nivel/00_automatizacion_lote/orquestar_feat_nativo.py run-all --execute --confirm EJECUTAR_FEAT_LOTE
+```
+
+**Advertencia:** este nuevo orquestador se incorporó al Git sin una prueba real en la Alienware ni una integración verificada con `feat_model`. No ejecutar `run-all` hasta comprobar el `prepare-all` y el diseño del primer candidato preparado. Las carpetas parciales no se eliminan ni relanzan automáticamente. El control anatómico/visual sigue siendo una limitación metodológica, aunque la elegibilidad previa esté registrada en manifiestos.
