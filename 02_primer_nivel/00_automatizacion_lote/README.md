@@ -39,3 +39,15 @@ Resolver faltantes de máscaras y confusores **en espacio funcional nativo**, au
 **Importante:** esta etapa NO es un lanzador de lote. Se probó con fixtures sintéticas; aún falta comprobarla sobre los datos reales de la Alienware. No subir NIfTI, EVs individuales, confusores ni informes por sujeto al repositorio público.
 
 Ver [piloto 6037/run1](../6037_run1/06_piloto_estadistico/README.md) y [código del inventario](inventariar_primer_nivel.py).
+
+## Actualización confirmada: confusores completos (14/10/2026)
+
+La auditoría final comunicada por la investigadora fue:
+
+```text
+RESUMEN runs=76 OK_TECNICO=72 LEGADO_COTEJADO=1 FUERA_DE_PREPARE=3 REVISAR=0
+FASES CONFOUNDS_COTEJADOS=73 PREPROC_INCOMPLETO=3
+QC NO_APLICA=3 PILOTO_MANUAL_SIN_JSON=1 REGISTRADO_POR_HUMANO=72
+```
+
+**Cerrada la etapa de confusores:** 73 runs completos (72 automatizados + piloto manual 6037/run1); 3 runs incompletos excluidos. El control visual de 72 runs está registrado por humano, principalmente mediante 71 láminas de cinco cortes; ese alcance no equivale a inspección exhaustiva de cada vóxel. Ahora corresponde generar y validar los FSF nativos por run antes de ejecutar FILM. Evitar modificar `~/FEAT` y nunca repetir el primer nivel de 6037/run1.
