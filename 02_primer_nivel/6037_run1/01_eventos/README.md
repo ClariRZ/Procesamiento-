@@ -26,12 +26,34 @@ Todos los archivos de los ocho EV fueron leídos en la Alienware y superaron los
 
 La auditoría no emitió advertencias por finales fuera de duración, duraciones cero ni inicio desordenado para estos ocho archivos.
 
-## Dos cuestiones por resolver antes de aprobar el diseño completo
+## Auditoría de cronología realizada (14/10/2026)
 
-1. **ObservaNeg contiene 23 eventos.** Sin conocer la secuencia exacta de consignas, NO podemos concluir que falte un evento. Contrastar con el paradigma y `Descanso.txt` / cronología antes de editar cualquier archivo.
-2. El último evento modelado finaliza a **637.806 s**, 136.194 s antes del final nominal del run (774 s). Puede corresponder a descanso u otra parte del protocolo; confirmar antes de atribuir error de sincronización.
+Se leyó **también `Descanso.txt`**, que tiene **30 eventos**, desde 12.193 s hasta 641.706 s. La secuencia observada al principio es:
 
-`Descanso.txt` no se agrega automáticamente como noveno EV: es necesario verificar si funciona como referencia implícita en el diseño original.
+| Intervalo (s) | Evento |
+|---|---|
+| 0.000–4.031 | AtencionPlena |
+| 4.031–12.214 | Likert |
+| 12.193–16.218 | Descanso |
+| 16.218–19.229 | ObservaNeg |
+| 19.229–25.233 | AtencionPlena |
+
+El primer ensayo comienza con `AtencionPlena` directamente en 0 s, sin instrucción `ObservaNeg` previa: **esto ofrece una explicación plausible de los 23 eventos `ObservaNeg`**, pero todavía NO verifica que cada uno de los demás ensayos tenga su instrucción correcta. No añadir eventos artificialmente.
+
+Los últimos eventos observados son:
+
+| Intervalo (s) | Evento |
+|---|---|
+| 620.706–623.714 | ObservaNeg |
+| 623.714–629.717 | ExperimNeg |
+| 629.717–637.806 | Likert |
+| 637.806–641.706 | Descanso |
+
+**Diferencia temporal pendiente de aclarar:** adquisición nominal 387×2 = **774 s**, fin del último descanso **641.706 s**, tramo restante **132.294 s** (unos 66 TR). El fin del último EV de tarea modelado es 637.806 s (136.194 s antes del fin nominal). Ambos números son correctos, pero hacen referencia a finales distintos.
+
+Podría existir un tramo final de adquisición sin tareas, o un desfase en el protocolo/recorte de volúmenes. **No hay evidencia suficiente para decidirlo**; verificar con metadatos reales de adquisición, diseño de la tarea, parámetros `ndelete` y cronología de otros runs. No recortar series, desplazar onsets ni agregar `Descanso` como noveno EV sin justificación.
+
+**Estado:** formato y tiempos dentro de adquisición aprobados; **coherencia completa del paradigma y tramo final por confirmar**, y también quedan pendientes los 21 contrastes.
 
 ## Scripts
 
