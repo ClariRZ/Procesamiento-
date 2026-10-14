@@ -11,7 +11,7 @@ if [[ $# -ne 1 ]]; then
     echo "Uso: bash $0 $ROOT/run1_REPRODUCCION_NUEVA" >&2
     exit 2
 fi
-OUT="$1"
+OUT="$(realpath -m -- "$1")"
 if [[ "$OUT" != "$ROOT/"* || -e "$OUT" || -L "$OUT" ]]; then
     echo "DETENIDO: indicar una salida NUEVA dentro de $ROOT; no se sobrescribe nada." >&2
     exit 2
