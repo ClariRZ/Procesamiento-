@@ -29,4 +29,4 @@ La huella SHA256 de `PRE/reg/highres.nii.gz` comienza por `a24dc10f6a8e99be`, co
 
 El segundo intento encontró el directorio `OUT` existente y se detuvo: «DETENIDO: ya existe ... No se sobrescribió nada».
 
-**Interpretación:** la generación y las comprobaciones de no-vacío se completaron; **la localización anatómica todavía NO está aprobada**. Volumen válido no implica pureza WM/CSF. No calcular señales hasta completar [QC visual](02_qc_visual.md).
+**Interpretación:** la generación y las comprobaciones de no-vacío se completaron; **la investigadora informó el 14/10/2026 que el control visual en FSLeyes estaba «todo ok»** (esta confirmación no equivale a una revisión independiente del asistente).. Volumen válido no implica pureza WM/CSF. No calcular señales hasta completar [QC visual](02_qc_visual.md).
