@@ -69,3 +69,11 @@ QC NO_APLICA=3 PILOTO_MANUAL_SIN_JSON=1 REGISTRADO_POR_HUMANO=72
 ```
 
 **Cerrada la etapa de confusores:** 73 runs completos (72 automatizados + piloto manual 6037/run1); 3 runs incompletos excluidos. El control visual de 72 runs está registrado por humano, principalmente mediante 71 láminas de cinco cortes; ese alcance no equivale a inspección exhaustiva de cada vóxel. Ahora corresponde generar y validar los FSF nativos por run antes de ejecutar FILM. Evitar modificar `~/FEAT` y nunca repetir el primer nivel de 6037/run1.
+
+
+## Piloto de configuración de 6037/run2 (14/10/2026)
+
+La usuaria ejecutó el generador local del paquete `primer_nivel_fsf_automatizacion.zip`; informó `RUN APTO 6037 run2 NPTS=387;TR=2;EV=8;CONFOUNDS=14;CONTRASTES=21` y **FSF candidato creado** en `~/TesisDoctoral/PRIMER_NIVEL_LOTE_NATIVO/6037/run2_CANDIDATO_NO_EJECUTAR.fsf`. El FSF resultante apunta a la carpeta nueva `~/TesisDoctoral/PRIMER_NIVEL_LOTE_NATIVO/6037/run2.feat`, **que aún no se ha copiado ni validado**. No se ha ejecutado FEAT para run2.
+
+El próximo paso es copiar solamente el `.feat` preprocesado original de 6037/run2 en una ruta independiente, sin datos MNI2 auxiliares ni `stats/` preexistente, cotejar los ocho archivos esenciales con el original, y después generar y revisar su diseño con `feat_model`. **No ejecutar FEAT antes de verificar la copia y el diseño.** La herramienta de copia fue probada con directorios sintéticos: plan sin escritura, copia cotejada, exclusión de estadísticas anteriores y rechazo de una segunda copia. Pendiente comprobarla en la Alienware.
+
