@@ -18,6 +18,22 @@
 - Comparación binaria `cmp` del BOLD `filtered_func_data.nii.gz` y `mask.nii.gz` de la copia frente a los originales: **ambos idénticos** al terminar. Esto no equivale a una auditoría exhaustiva de todos los archivos del original ni a una validación espacial.
 - Los cuatro archivos de registro `reg/example_func2highres.mat`, `reg/highres2standard_warp.nii.gz`, `reg/example_func2standard_warp.nii.gz`, `reg/standard.nii.gz` **ya se habían verificado idénticos** entre copia y original antes de ejecutar el piloto.
 
+## QC geométrico dimensional (14/10/2026)
+
+Comprobado en Alienware mediante `fslinfo` y `fslstats -V` en `entrada_run1.feat/`:
+
+| Imagen | Dimensiones (x,y,z,t) | Tamaño de vóxel espacial (mm) |
+|---|---|---|
+| `filtered_func_data` | 64,64,44,387 | 3.593800,3.593800,3.599899 |
+| `mask` | 64,64,44,1 | igual |
+| `stats/cope1` | 64,64,44,1 | igual |
+| `stats/varcope1` | 64,64,44,1 | igual |
+| `stats/zstat1` | 64,64,44,1 | igual |
+
+TR (BOLD): 2.000000 s. `fslstats mask -V` = **43812 vóxeles** (2 037 001 mm³). Coincide con la máscara original registrada anteriormente. Dimensiones y tamaño de vóxel coincidentes **no certifican por sí solos la matriz afín/orientación**.
+
+**Observación por resolver:** en el log de `film_gls` y `smoothest` se utiliza el volumen de **41342 vóxeles**, menor que los 43812 de la máscara guardada. Probablemente el umbral de intensidad `--thr=1000` deja menos vóxeles efectivos, pero la explicación no está confirmada. Auditar la máscara efectiva sin relanzar FEAT antes de considerar aprobado el control espacial.
+
 ## Próxima y única fase de QC antes del segundo run
 
 Comprobar las geometrías del BOLD/máscara/COPE y la máscara efectiva del análisis, e inspeccionar las imágenes estadísticas en FSLeyes. Luego revisar que la carpeta `.feat` con estadísticas contenga las transformaciones esperadas para el segundo nivel de efectos fijos. **No volver a lanzar FEAT sobre esta copia**, no repetir los controles de diseño ya completados.
