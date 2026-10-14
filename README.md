@@ -7,7 +7,7 @@
 | Carpeta | Etapa | Estado |
 |---|---|---|
 | [00_insumos_y_preprocesamiento](00_insumos_y_preprocesamiento/README.md) | Localizar y comprobar el preprocesamiento FSL original | Insumos confirmados; QC previo no sustituido |
-| [01_confundidores/6037_run1](01_confundidores/6037_run1/README.md) | FAST existente, máscaras WM/CSF en EPI, revisión, señales, 14 columnas | **Máscaras generadas; QC visual confirmado por la investigadora; señales pendientes** |
+| [01_confundidores/6037_run1](01_confundidores/6037_run1/README.md) | FAST existente, máscaras WM/CSF en EPI, revisión, señales, 14 columnas | **Máscaras y señales nativas correctas; matriz 387×14 pendiente** |
 | [02_primer_nivel](02_primer_nivel/README.md) | GLM de cada run en espacio funcional nativo; 8 EV y 21 contrastes | Pendiente |
 | [03_efectos_fijos](03_efectos_fijos/README.md) | Combinar run1 + run2 por sujeto | Pendiente |
 | [04_analisis_grupal](04_analisis_grupal/README.md) | Comparaciones entre participantes | Pendiente |
