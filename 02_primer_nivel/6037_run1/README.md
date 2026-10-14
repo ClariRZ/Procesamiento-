@@ -14,7 +14,9 @@
 | Generar `design.mat` y `design.con` mediante `feat_model` | **Completado: 387×30 y 21×30** |
 | Control numérico de rango | **30/30, correcto** |
 | Comparar contrastes efectivos del diseño con el FSF | **Pendiente** |
-| Ejecutar FILM y revisar las 21 salidas | **Pendiente** |
+| Ejecución estadística de FILM | **Completada en la copia de preprocesamiento** |
+| COPE, VARCOPE y ZSTAT | **21/21 cada uno** |
+| QC de espacio nativo, máscara efectiva y mapas | **Pendiente** |
 
 [**Paso 01 — eventos del paradigma**](01_eventos/README.md) incluye la auditoría básica, la cronología y la [comparación temporal de ambos runs](01_eventos/02_comparacion_runs/README.md). [**Paso 02 — contrastes**](02_contrastes/README.md) documenta nombres, pesos y la [expansión 21/21 a 16 EV](02_contrastes/01_expansion_real/README.md), con scripts auditores. No publicar en GitHub los archivos individuales de eventos.
 
@@ -23,10 +25,10 @@ La plantilla original en la Alienware es:
 
 El primer nivel a preparar será **Statistics only en espacio funcional nativo, sobre copia independiente del directorio `~/FEAT/6037/run1.feat`**, con 8 EV + 8 derivadas, 21 contrastes y 14 regresores adicionales. Sin duplicar movimiento, sin aplicar de nuevo suavizado ni transformar toda la serie 4D a MNI.
 
-**Copia independiente ya creada y comprobada:** [03_copia_preprocesamiento](03_copia_preprocesamiento/README.md) (`~/TesisDoctoral/PRIMER_NIVEL_NATIVO_6037/entrada_run1.feat/`). Se cotejaron cinco archivos esenciales con `cmp`; no se ejecutó FEAT. Siguiente: auditar configuración de registros y EVs del FSF manual antes de generar un diseño nuevo.
+**Copia independiente ya creada y comprobada:** [03_copia_preprocesamiento](03_copia_preprocesamiento/README.md) (`~/TesisDoctoral/PRIMER_NIVEL_NATIVO_6037/entrada_run1.feat/`). Se cotejaron cinco archivos esenciales con `cmp`; luego se ejecutó **Statistics only** dentro de esa copia (ver paso 06). La carpeta original `~/FEAT/6037/run1.feat` permanece separada.
 
 **Registro, convolución y filtros comprobados:** el FSF nativo de preprocesamiento declara funcional→T1 y T1→MNI no lineal, mientras que la plantilla manual estadística usaba BOLD ya MNI. Los ocho EV conservan HRF doble gamma (`convolve=3`) y filtrado del diseño (`tempfilt_yn=1`). [Informe y script](04_revision_configuracion/README.md). Los registros del preprocesamiento deben preservarse al preparar Stats only; no reutilizar a ciegas las opciones espaciales del FSF manual.
 
-**Matriz de diseño generada y rango comprobado:** [05_validacion_diseno](05_validacion_diseno/README.md). No se ejecutó FILM. Todavía se deben comprobar los pesos efectivos del diseño, colinealidad y el comportamiento real de la entrada `.feat`.
+**Matriz de diseño generada y rango comprobado:** [05_validacion_diseno](05_validacion_diseno/README.md). El diseño fue validado antes de ejecutar FILM. El comportamiento de la entrada `.feat` se identificó empíricamente en el paso 06.
 
-**No ejecutar FEAT antes de cerrar los puntos pendientes.**
+**Ejecución y fallo de configuración documentados:** [06_piloto_estadistico](06_piloto_estadistico/README.md). Se identificó el error inicial de `inputtype=2`, se usó `inputtype=1` y los resultados estadísticos quedaron dentro de `entrada_run1.feat`; **no hay que relanzar el primer nivel**. Antes de run2: comprobar geometrías, máscara efectiva y registros de salida.
