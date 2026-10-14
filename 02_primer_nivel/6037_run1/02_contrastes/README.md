@@ -46,4 +46,4 @@ El reporte de la terminal confirma que cada vector `con_origN.1…con_origN.8` c
 
 [verificar_contrastes_originales.sh](verificar_contrastes_originales.sh) realiza una auditoría de solo lectura, sin NumPy. **El script fue incorporado después de la comprobación manual, y todavía no ha sido ejecutado como archivo versionado en la Alienware**.
 
-**Siguiente paso:** inspeccionar los pesos expandidos `con_realN.M` (16 posiciones) y el formato del FSF, luego generar y controlar `design.mat` con `feat_model` en una salida nueva; no ejecutar FEAT todavía.
+**Expansión a 16 EV completada:** los 21/21 contrastes `con_real` coinciden con los ocho pesos originales intercalados con cero para la derivada de cada EV. [Ver auditoría y script reproducible](01_expansion_real/README.md). **Siguiente paso:** verificar configuración exacta del primer nivel nativo y generar/controlar `design.mat` con `feat_model` en una salida nueva; todavía no ejecutar FEAT.
