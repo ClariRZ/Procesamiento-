@@ -9,11 +9,12 @@
 | 8 archivos EV, amplitudes y tiempos dentro de adquisición | **Auditoría básica completada** |
 | Comparar secuencias y cola temporal de run1/run2 | **Realizado: 132.294 s vs 132.405 s; causa por confirmar** |
 | Validar secuencia completa y causa de la cola con protocolo de tarea | **Pendiente** |
-| Revisar pesos y nombres de los 21 contrastes | **Pendiente** |
+| Revisar pesos y nombres de los 21 contrastes originales | **Completado: 21/21, todos finitos y con ±1 correctos** |
+| Comprobar expansión a 16 regresores de tarea (`con_real`) | **Pendiente** |
 | Comprobar `design.mat` y rango con `feat_model` | **Pendiente** |
 | Ejecutar FILM y revisar las 21 salidas | **Pendiente** |
 
-[**Paso 01 — eventos del paradigma**](01_eventos/README.md) incluye la auditoría básica, la cronología y la [comparación temporal de ambos runs](01_eventos/02_comparacion_runs/README.md). No publicar en GitHub los archivos individuales de eventos.
+[**Paso 01 — eventos del paradigma**](01_eventos/README.md) incluye la auditoría básica, la cronología y la [comparación temporal de ambos runs](01_eventos/02_comparacion_runs/README.md). [**Paso 02 — contrastes originales**](02_contrastes/README.md) documenta sus 21 nombres y pesos, con el script auditor. No publicar en GitHub los archivos individuales de eventos.
 
 La plantilla original en la Alienware es:
 `~/Pipeline-completo-de-procesamiento-de-datos-/01_primer_nivel/automatizacion_mirta/plantilla/first_level_6037_run1_master.fsf`.
