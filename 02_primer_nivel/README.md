@@ -1,5 +1,7 @@
 # 02 — Primer nivel FEAT por run en espacio funcional nativo
 
+**Automatización masiva:** [etapa 00 — inventario y validación de elegibilidad](00_automatizacion_lote/README.md). Antes de lanzar el lote, detectar en la Alienware los runs efectivamente preprocesados y los confusores nativos aún faltantes. No modificar los `.feat` originales.
+
 **Piloto: [6037/run1](6037_run1/README.md).**
 
 ## Estado actual (14/10/2026)
