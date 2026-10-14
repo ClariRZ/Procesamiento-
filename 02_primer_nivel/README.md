@@ -1,11 +1,18 @@
-# 02 — Primer nivel FEAT por run, en espacio funcional nativo
+# 02 — Primer nivel FEAT por run en espacio funcional nativo
 
-**Estado: PENDIENTE**, condicionado a confusores nativos revisados y completos.
+**Piloto: [6037/run1](6037_run1/README.md).**
 
-Para 6037/run1, usar una **copia independiente** de `~/FEAT/6037/run1.feat`; FEAT **First-level analysis → Statistics → Input is a FEAT directory**. No reemplazar `filtered_func_data.nii.gz` por la imagen normalizada. Conservar los productos `reg/` originales y verificar qué máscara utiliza efectivamente FILM.
+## Estado actual (14/10/2026)
 
-Modelo a auditar antes de ejecutar: FSF manual original G15 `/home/clara/Escritorio/6037/run1_firstlevel.feat/design.fsf` (8 EV con derivadas temporales, 21 contrastes, 387 volúmenes, TR 2 s, FILM). Cambiar **solo en una copia** las rutas de eventos, confusores, FEAT de entrada y salida; comprobar diseño y confusores sin duplicar movimiento. Los archivos de eventos de 6037/run1 deben verificarse en la Alienware; no asumir su existencia por el FSF de la G15.
+- **14 confusores nativos 387×14 ya verificados** para el run1.
+- **8 EV originales y 8 derivadas temporales** presentes en la plantilla; auditoría temporal básica de los ocho archivos EV realizada. [Ver resultados y pendientes](6037_run1/01_eventos/README.md).
+- **Pendiente:** examinar la cronología experimental (ObservaNeg=23, `Descanso.txt`, tramo final no modelado), los 21 contrastes y el diseño generado por `feat_model`.
+- **FILM y primer nivel todavía no ejecutados** en la rama nativa.
 
-El procedimiento completo y su ejecución se documentarán **después** de cerrar el control visual y la matriz 14×387. No lanzar el GLM ni el lote todavía.
+## Configuración que se comprobará antes de ejecutar
 
-**Importante:** la combinación de dos runs no forma parte del primer nivel; se realiza en [03_efectos_fijos](../03_efectos_fijos/README.md).
+En la Alienware, copiar **sin modificar el original** `~/FEAT/6037/run1.feat`; escoger FEAT *First-level → Statistics → Input is a FEAT directory* apuntando a esa copia. Mantener `filtered_func_data.nii.gz` funcional nativo, máscara funcional y registros originales. No renombrar `filtered_func_data_MNI2`, no volver a suavizar ni volver a procesar movimiento.
+
+Tomar los pesos y títulos de los 21 contrastes del FSF original de 6037/run1 importado de G15; no inventar contrastes. Cargar en FEAT un único archivo `~/TesisDoctoral/confounds_nativos/6037/run1/todos_confounds_nativo.txt` en *Add additional confound EVs*, y elegir *Don't Add Motion Parameters* (ya incluido).
+
+No lanzar el primer nivel ni el lote hasta verificar rango del diseño, EVs, contrastes y geometrías. El segundo nivel de efectos fijos viene **después**, con `COPE` y `VARCOPE` de run1/run2 y registros apropiados.
