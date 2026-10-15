@@ -235,7 +235,9 @@ def main() -> int:
         different = [k for k in PREPROC_CRITICAL if left[k] != right[k]]
         if different:
             mismatches += 1
-            print(sid, ':', ', '.join(f'{k}={left[k]}|{right[k]}' for k in different))
+            detail = ', '.join(f'{k}={left[k]}|{right[k]}' for k in different)
+            alerts.append(f'{sid}: PARAMETROS_DISCORDANTES_RUN1_RUN2 {detail}')
+            print(sid, ':', detail)
     if mismatches == 0:
         print('NINGUNA_DIFERENCIA_EN_PARAMETROS_COMPARADOS')
     print('\n=== Advertencias ===')
